@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // print first school name
                 String firstSchoolName = collection.features.get(0).properties.schoolNameTc;
-                Log.d(TAG, "The first school was: " + firstSchoolName);
+                Log.d(TAG, "The first school was : " + firstSchoolName);
             }
 
         } catch (Exception e) {
