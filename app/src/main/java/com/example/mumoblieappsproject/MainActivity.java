@@ -16,20 +16,18 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "DataTest";
 
-    private RecyclerView recyclerView; // 声明列表控件
-    private SchoolAdapter adapter; // 声明适配器
+    private RecyclerView recyclerView;
+    private SchoolAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 1. 初始化 RecyclerView
         recyclerView = findViewById(R.id.recyclerViewSchools);
-        // 设置列表为垂直线性滚动
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // 2. 加载数据
+
         loadSchoolData();
     }
 
