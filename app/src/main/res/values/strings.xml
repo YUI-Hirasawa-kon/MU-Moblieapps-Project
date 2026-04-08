@@ -1,3 +1,47 @@
 <resources>
-    <string name="app_name">MU Moblie apps Project</string>
+    <string name="app_name">HK School Info Pro</string>
+    <string name="search_hint">Search schools...</string>
+    <string name="my_wishlist">My Wishlist</string>
+
+    <string name="teacher_qualifications">Teacher Qualifications</string>
+    <string name="campus_facilities">Campus Facilities</string>
+
+
+    <string name="phone">Call</string>
+    <string name="website">Website</string>
+    <string name="email">Email</string>
+    <string name="mission_background_title">Mission &amp; Background</string>
+    <string name="religion_bg">Religion</string>
+    <string name="expand">Expand ↓</string>
+    <string name="collapse">Collapse ↑</string>
+    <string name="academic_title">Academics &amp; Admission</string>
+    <string name="language_policy">Medium of Instruction</string>
+    <string name="admission_criteria">Admission Criteria</string>
+    <string name="class_structure">Class Structure</string>
+    <string name="staff_title">Teaching Staff</string>
+    <string name="exp_distribution">Teacher Experience (Years)</string>
+    <string name="exp_0_4">0-4年</string>   <!-- Chinese tags are left for dynamic switching in the code. -->
+    <string name="exp_5_9">5-9年</string>
+    <string name="exp_10_plus">10年以上</string>
+    <string name="exp_0_4_en">0-4 years</string>
+    <string name="exp_5_9_en">5-9 years</string>
+    <string name="exp_10_plus_en">10+ years</string>
+    <string name="qualification_chart_title">學歷分佈</string>
+    <string name="qualification_chart_title_en">Qualifications</string>
+    <string name="only_bachelor">僅學士</string>
+    <string name="only_bachelor_en">Bachelor only</string>
+    <string name="master_plus">碩士及以上</string>
+    <string name="master_plus_en">Master or above</string>
+    <string name="memo_dialog_title">Add Note</string>
+    <string name="memo_dialog_title_en">Add Note</string>
+    <string name="memo_hint">e.g. Open Day on May 20</string>
+    <string name="memo_hint_en">e.g. Open Day on May 20</string>
+    <string name="note_prefix">Note</string>
+    <string name="note_prefix_en">Note</string>
+    <string name="click_add_note">Click to add note...</string>
+    <string name="click_add_note_en">Click to add note...</string>
+    <string name="motto_prefix">Motto</string>
+    <string name="motto_prefix_en">Motto</string>
+    <string name="address_prefix">Address</string>
+    <string name="address_prefix_en">Address</string>
 </resources>

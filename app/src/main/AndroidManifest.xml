@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MUMoblieAppsProject"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBVPpB0csnWCTPWawcZ-fL7xJWF7VnDd8w" />
+        <activity
+            android:name=".SchoolDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WishlistActivity"
+            android:exported="false"
+            android:label="我的心愿单" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

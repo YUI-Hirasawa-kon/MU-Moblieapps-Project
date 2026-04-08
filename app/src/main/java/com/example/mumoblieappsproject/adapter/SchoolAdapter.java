@@ -1,5 +1,7 @@
 package com.example.mumoblieappsproject.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,65 +11,83 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mumoblieappsproject.R;
+import com.example.mumoblieappsproject.SchoolDetailActivity;
 import com.example.mumoblieappsproject.model.SchoolFeature;
+import com.example.mumoblieappsproject.model.SchoolProperties;
+import com.google.gson.Gson;
 
 import java.util.List;
+import java.util.Locale;
 
 public class SchoolAdapter extends RecyclerView.Adapter<SchoolAdapter.SchoolViewHolder> {
+
     private List<SchoolFeature> schoolList;
+    private Context context;
 
-
-    public SchoolAdapter(List<SchoolFeature> schoolList) {
+    // 构造函数：接收数据列表和 Context
+    public SchoolAdapter(List<SchoolFeature> schoolList, Context context) {
         this.schoolList = schoolList;
+        this.context = context;
     }
 
-    // Create a card view (convert XML into a View)
+    public void updateData(List<SchoolFeature> newList) {
+        this.schoolList = newList;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public SchoolViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_school, parent, false);
+
+        if (context == null) context = parent.getContext();
+        View view = LayoutInflater.from(context).inflate(R.layout.item_school, parent, false);
         return new SchoolViewHolder(view);
     }
 
-    // Bind the data to the view (fill in the text).
     @Override
     public void onBindViewHolder(@NonNull SchoolViewHolder holder, int position) {
-        SchoolFeature currentSchool = schoolList.get(position);
+        SchoolFeature school = schoolList.get(position);
+        SchoolProperties p = school.properties;
 
-        // Bind Chinese school name, region and type
-        holder.tvSchoolName.setText(currentSchool.properties.schoolNameTc);
-        holder.tvDistrict.setText(currentSchool.properties.districtTc);
-        holder.tvSchoolType.setText(currentSchool.properties.schoolTypeTc);
-        // Added: Set a click event for the entire card.
+        boolean isEnglish = Locale.getDefault().getLanguage().equals("en");
+
+        if (isEnglish) {
+            holder.tvSchoolName.setText(p.schoolNameEn != null && !p.schoolNameEn.isEmpty() ? p.schoolNameEn : p.schoolNameTc);
+            holder.tvDistrict.setText(p.districtEn != null ? p.districtEn : p.districtTc);
+            holder.tvSchoolType.setText(p.schoolTypeEn != null ? p.schoolTypeEn : p.schoolTypeTc);
+        } else {
+            holder.tvSchoolName.setText(p.schoolNameTc);
+            holder.tvDistrict.setText(p.districtTc);
+            holder.tvSchoolType.setText(p.schoolTypeTc);
+        }
+
+
+
         holder.itemView.setOnClickListener(v -> {
-            // Prepare the Intent logic for the next phase three
-            // Intent intent = new Intent(v.getContext(), SchoolDetailActivity.class);
-            // intent.putExtra("SCHOOL_ID", currentSchool.properties.id);
-            // v.getContext().startActivity(intent);
-
-            // For now, let's use a log to prove that clicking the button takes effect.
-            android.util.Log.d("ClickTest", "点击了: " + currentSchool.properties.schoolNameTc);
+            Intent intent = new Intent(context, SchoolDetailActivity.class);
+            String schoolJson = new Gson().toJson(school);
+            intent.putExtra("school_data", schoolJson);
+            context.startActivity(intent);
         });
     }
 
-    //  Tell the total number of records in the list.
     @Override
     public int getItemCount() {
         return schoolList == null ? 0 : schoolList.size();
     }
 
-    // ViewHolder: Responsible for locating the individual TextView controls within the card.
+    //  Declare all controls completely in ViewHolder
     public static class SchoolViewHolder extends RecyclerView.ViewHolder {
         TextView tvSchoolName, tvDistrict, tvSchoolType;
+
 
         public SchoolViewHolder(@NonNull View itemView) {
             super(itemView);
             tvSchoolName = itemView.findViewById(R.id.tvSchoolName);
             tvDistrict = itemView.findViewById(R.id.tvDistrict);
             tvSchoolType = itemView.findViewById(R.id.tvSchoolType);
+
+
         }
-
-
     }
 }
