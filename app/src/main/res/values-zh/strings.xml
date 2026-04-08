@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">香港學校資訊專業版</string>
+    <string name="search_hint">搜尋學校...</string>
+    <string name="my_wishlist">我的願望清單</string>
+    <string name="teacher_qualifications">教師學歷分佈</string>
+    <string name="campus_facilities">校園設施</string>
+
+    <string name="phone">撥號</string>
+    <string name="website">官網</string>
+    <string name="email">郵件</string>
+    <string name="mission_background_title">辦學宗旨與背景</string>
+    <string name="religion_bg">宗教背景</string>
+    <string name="expand">展開全文 ↓</string>
+    <string name="collapse">收起 ↑</string>
+    <string name="academic_title">學術與招生</string>
+    <string name="language_policy">教學語言</string>
+    <string name="admission_criteria">收生準則</string>
+    <string name="class_structure">班級結構</string>
+    <string name="staff_title">教職員團隊</string>
+    <string name="exp_distribution">教師年資分佈 (年)</string>
+
+    <string name="exp_0_4">0-4年</string>
+    <string name="exp_5_9">5-9年</string>
+    <string name="exp_10_plus">10年以上</string>
+    <!-- 英文标签也保留中文（图表代码中会按需选择） -->
+    <string name="exp_0_4_en">0-4年</string>
+    <string name="exp_5_9_en">5-9年</string>
+    <string name="exp_10_plus_en">10年以上</string>
+
+    <string name="qualification_chart_title">學歷分佈</string>
+    <string name="qualification_chart_title_en">學歷分佈</string>
+    <string name="only_bachelor">僅學士</string>
+    <string name="only_bachelor_en">僅學士</string>
+    <string name="master_plus">碩士及以上</string>
+    <string name="master_plus_en">碩士及以上</string>
+
+    <string name="memo_dialog_title">添加備忘</string>
+    <string name="memo_dialog_title_en">添加備忘</string>
+    <string name="memo_hint">例如：5月20日開放日</string>
+    <string name="memo_hint_en">例如：5月20日開放日</string>
+    <string name="note_prefix">備忘</string>
+    <string name="note_prefix_en">備忘</string>
+    <string name="click_add_note">點擊添加備忘錄...</string>
+    <string name="click_add_note_en">點擊添加備忘錄...</string>
+
+    <string name="motto_prefix">校訓</string>
+    <string name="motto_prefix_en">校訓</string>
+    <string name="address_prefix">地址</string>
+    <string name="address_prefix_en">地址</string>
+</resources>
