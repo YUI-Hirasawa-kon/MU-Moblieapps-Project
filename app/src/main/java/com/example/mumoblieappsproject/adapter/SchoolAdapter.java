@@ -24,7 +24,7 @@ public class SchoolAdapter extends RecyclerView.Adapter<SchoolAdapter.SchoolView
     private List<SchoolFeature> schoolList;
     private Context context;
 
-    // 构造函数：接收数据列表和 Context
+    // Constructor: Receives a list of data and a Context.
     public SchoolAdapter(List<SchoolFeature> schoolList, Context context) {
         this.schoolList = schoolList;
         this.context = context;
@@ -49,7 +49,8 @@ public class SchoolAdapter extends RecyclerView.Adapter<SchoolAdapter.SchoolView
         SchoolFeature school = schoolList.get(position);
         SchoolProperties p = school.properties;
 
-        boolean isEnglish = Locale.getDefault().getLanguage().equals("en");
+        boolean isEnglish = context.getResources().getConfiguration().locale.getLanguage().equals("en");
+
 
         if (isEnglish) {
             holder.tvSchoolName.setText(p.schoolNameEn != null && !p.schoolNameEn.isEmpty() ? p.schoolNameEn : p.schoolNameTc);

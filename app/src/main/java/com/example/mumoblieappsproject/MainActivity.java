@@ -109,30 +109,29 @@ public class MainActivity extends AppCompatActivity {
 
 
         btnOpenWishlist = findViewById(R.id.fabWishlist);
-
-        // Set a click event to redirect to the wishlist page.
         btnOpenWishlist.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, WishlistActivity.class);
             startActivity(intent);
         });
 
-        // Find  toggle button in the onCreate method.
-        Button btnLanguageToggle = findViewById(R.id.btnLanguageToggle);
 
+        btnLanguageToggle = findViewById(R.id.btnLanguageToggle);
         btnLanguageToggle.setOnClickListener(v -> {
-            // Get the language setting of the current application
-            LocaleListCompat currentLocales = AppCompatDelegate.getApplicationLocales();
+            // Obtain the language currently used by the application (via Resources Configuration).
+            String currentLang = getResources().getConfiguration().locale.getLanguage();
 
-            // If the current field is empty (following the system) or the current language is Chinese, then switch to English.
-            if (currentLocales.isEmpty() || currentLocales.get(0).getLanguage().equals("zh")) {
+            if (currentLang.equals("zh")) {
+                // Currently in Chinese, please switch to English.
                 AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("en"));
                 Toast.makeText(this, "Switched to English", Toast.LENGTH_SHORT).show();
             } else {
-                // Otherwise, switch back to tc
-                AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("zh"));
+                // Currently in English or other languages, please switch to Traditional Chinese.
+                AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags("zh")); // 或 "zh"
                 Toast.makeText(this, "已切換為中文", Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
     }
 

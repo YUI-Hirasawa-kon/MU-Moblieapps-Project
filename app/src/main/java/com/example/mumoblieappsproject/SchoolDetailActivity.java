@@ -67,7 +67,7 @@ public class SchoolDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school_detail);
 
-        // Initialize control
+
         chartTeacherQual = findViewById(R.id.chartTeacherQual);
         chartTeacherExp = findViewById(R.id.chartTeacherExp);
         tvDetailSchoolName = findViewById(R.id.tvDetailSchoolName);
@@ -78,33 +78,42 @@ public class SchoolDetailActivity extends AppCompatActivity {
         btnEmail = findViewById(R.id.btnEmail);
         btnWeb = findViewById(R.id.btnWeb);
 
+        // First initialize the database
+        db = AppDatabase.getInstance(this);
 
-        // Receive data
+        // get data
         String schoolJson = getIntent().getStringExtra("school_data");
         if (schoolJson != null) {
             currentSchool = new Gson().fromJson(schoolJson, SchoolFeature.class);
-            setupUI(currentSchool);   // All UI settings are centralized here.
+            setupUI(currentSchool);
         } else {
             Toast.makeText(this, "Unable to obtain school information", Toast.LENGTH_SHORT).show();
             finish();
         }
-
-
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(R.string.app_name);
         }
-
-        // Collection database initialization...
-        db = AppDatabase.getInstance(this);
-        // ... The logic of collecting remains unchanged
     }
 
     private void setupUI(SchoolFeature school) {
+
+
+
+
+
+
+        String schoolId = school.properties.id;
+        Executors.newSingleThreadExecutor().execute(() -> {
+            FavoriteSchool existing = db.favoriteSchoolDao().getFavoriteById(schoolId);
+            isFavorited = (existing != null);
+            runOnUiThread(() -> updateFavoriteButtonUI());
+        });
+
         SchoolProperties p = school.properties;
-        boolean isEnglish = Locale.getDefault().getLanguage().equals("en");
+        boolean isEnglish = getResources().getConfiguration().locale.getLanguage().equals("en");
 
         // ========= 1. Header information =========
         tvDetailSchoolName.setText(isEnglish ? p.schoolNameEn : p.schoolNameTc);
@@ -204,6 +213,32 @@ public class SchoolDetailActivity extends AppCompatActivity {
 
 
 
+
+
+
+        //wish list function
+        btnFavorite.setOnClickListener(v -> {
+            Executors.newSingleThreadExecutor().execute(() -> {
+                if (isFavorited) {
+                    FavoriteSchool toDelete = new FavoriteSchool(schoolId, p.schoolNameTc, p.schoolNameEn);
+                    db.favoriteSchoolDao().delete(toDelete);
+                    runOnUiThread(() -> {
+                        isFavorited = false;
+                        updateFavoriteButtonUI();
+                        Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show();
+                    });
+                } else {
+                    FavoriteSchool toInsert = new FavoriteSchool(schoolId, p.schoolNameTc, p.schoolNameEn);
+                    db.favoriteSchoolDao().insert(toInsert);
+                    runOnUiThread(() -> {
+                        isFavorited = true;
+                        updateFavoriteButtonUI();
+                        Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show();
+                    });
+                }
+            });
+        });
+
     }
 
 
@@ -276,7 +311,7 @@ public class SchoolDetailActivity extends AppCompatActivity {
                 return;
             }
 
-            // 先创建 entries 列表
+            // First, create a list of entries.
             ArrayList<PieEntry> entries = new ArrayList<>();
             if (onlyBachelor > 0) {
                 entries.add(new PieEntry(onlyBachelor, isEnglish ? getString(R.string.only_bachelor_en) : getString(R.string.only_bachelor)));

@@ -44,7 +44,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.WishVi
     @Override
     public void onBindViewHolder(@NonNull WishViewHolder holder, int position) {
         FavoriteSchool school = favList.get(position);
-        boolean isEnglish = Locale.getDefault().getLanguage().equals("en");
+        boolean isEnglish = context.getResources().getConfiguration().locale.getLanguage().equals("en");
+
 
         if (isEnglish) {
             holder.tvName.setText(school.schoolNameEn != null ? school.schoolNameEn : school.schoolNameTc);

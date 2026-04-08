@@ -52,7 +52,7 @@ public class WishlistActivity extends AppCompatActivity {
 
     // ========== Memo pop-up and update logic ==========
     private void showMemoDialog(FavoriteSchool school) {
-        boolean isEnglish = Locale.getDefault().getLanguage().equals("en");
+        boolean isEnglish = getResources().getConfiguration().locale.getLanguage().equals("en");
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         String title = isEnglish ? getString(R.string.memo_dialog_title_en) : getString(R.string.memo_dialog_title);
         builder.setTitle(title + " " + (isEnglish ? school.schoolNameEn : school.schoolNameTc));
